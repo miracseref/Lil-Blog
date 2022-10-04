@@ -1,16 +1,18 @@
 # Lil Blog
 
+![Logo](https://raw.githubusercontent.com/miracseref/lil-blog/main/static/lil_blog-logo.png)
+
 Blog created with Flask &amp; styled with Tailwind CSS.
 
 # Setup
 
 1. Create a new conda environment.
-   ```conda create -p venv python=3.9.12 -y```
+   `conda create -p venv python=3.9.12 -y`
 2. Activate the virtual environment.
-   ```conda activate $path```
+   `conda activate $path`
 3. Install Tailwind CSS.
-   ```npm install -D tailwindcss```
+   `npm install -D tailwindcss`
 4. Initialize Tailwind CSS.
-   ```npx tailwindcss init```
+   `npx tailwindcss init`
 5. Install python requirements.
-   ```pip install -r requirements.txt```
+   `pip install -r requirements.txt`
