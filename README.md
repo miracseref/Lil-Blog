@@ -1,6 +1,6 @@
 # Lil Blog
 
-![Logo](https://raw.githubusercontent.com/miracseref/lil-blog/main/static/lil-blog-logo.png)
+![Logo](https://github.com/miracseref/lil-blog/blob/main/website/static/lil-blog-logo.png)
 
 Blog created with Flask &amp; styled with Tailwind CSS.
 
