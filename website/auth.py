@@ -50,17 +50,17 @@ def sign_up():
         email_pattern = "^[a-z]+[-_$.a-z]*@[a-z]*\.[a-z]+$"
 
         if email_exists:
-            flash('Email is already in use.', category='error')
+            flash('This email is already in use.', category='error')
         elif username_exists:
-            flash('Username is already in use.', category='error')
+            flash('This username is already in use.', category='error')
         elif password != confirmation:
-            flash('Password don\'t match!', category='error')
+            flash('The password don\'t match!', category='error')
         elif len(username) < 2:
-            flash('Username is too short.', category='error')
-        elif re.match(password_pattern, password):
-            flash('Password is not strong enough.', category='error')
-        elif re.match(email_pattern, email, re.IGNORECASE):
-            flash("Email is invalid.", category='error')
+            flash('The username is too short.', category='error')
+        elif not re.match(password_pattern, password):
+            flash('The password is not strong enough.', category='error')
+        elif not re.match(email_pattern, email, re.IGNORECASE):
+            flash("This email is invalid.", category='error')
         else:
             new_user = User(email=email, username=username, password=generate_password_hash(
                 password, method='sha256'))
