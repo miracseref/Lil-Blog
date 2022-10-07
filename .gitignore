@@ -133,3 +133,6 @@ node_modules/
 
 # Flask Config
 website/config.py
+
+# Database
+website/database.db
