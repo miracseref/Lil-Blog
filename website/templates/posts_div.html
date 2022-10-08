@@ -2,29 +2,16 @@
 {% block title %}Home{% endblock %}
 {% block content%}
 <h1
-  class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+  class="text-center mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
   Posts</h1>
 <div class="posts">
   {% for post in posts %}
 
   <div class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-    <a href="#">
-      <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Need a help in Claim?</h5>
-    </a>
-    <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Go to this step by step guideline process on how to
-      certify for your weekly benefits:</p>
-    <a href="#" class="inline-flex items-center text-blue-600 hover:underline">
-      See our guideline
-      <svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z">
-        </path>
-        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
-      </svg>
-    </a>
-  </div>
-  <div class="card border-dark">
-    <div class="card-header d-flex justify-content-between align-items-center">
-      <a href="/posts/{{post.user.username}}">{{post.user.username}}</a>
+    <div class="py-3 px-6 border-b border-gray-300">
+      <a href="/posts/{{post.user.username}}">
+        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">{{post.user.username}}</h5>
+      </a>
       <div>
         <span id="likes-count-{{post.id}}">
           {{ post.likes|length }}</span>
@@ -44,8 +31,41 @@
         {% endif %}
       </div>
     </div>
+    <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">{{post.text}}</p>
+    {% if post.comments|length > 0 %}
+    <a href="#comments-{{post.id}}" class="inline-flex items-center text-blue-600 hover:underline" type="button"
+      data-bs-toggle="collapse">
+      <small>View {{post.comments|length}} Comments</small>
+    </a>
+    {% else %}
+    <small class="text-slate-400">No Comments</small>
+    {% endif %}
+  </div>
+  {#################################################################################}
+  <div class="card border-dark">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      {# <a href="/posts/{{post.user.username}}">{{post.user.username}}</a> #}
+      {# <div>
+        <span id="likes-count-{{post.id}}">
+          {{ post.likes|length }}</span>
+        {% if user.id in post.likes|map(attribute="author")|list %}
+        <i class="fas fa-thumbs-up" id="like-button-{{post.id}}" onclick="like({{post.id}})"></i>
+        {% else %}
+        <i class="far fa-thumbs-up" id="like-button-{{post.id}}" onclick="like({{post.id}})"></i>
+        {% endif %} {% if user.id == post.author %}
+        <div class="btn-group">
+          <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown"></button>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="/delete-post/{{post.id}}" class="dropdown-item">Delete</a>
+            </li>
+          </ul>
+        </div>
+        {% endif %}
+      </div> #}
+    </div>
     <div class="card-body">
-      <div class="card-text">{{post.text}}</div>
+      {# <div class="card-text">{{post.text}}</div> #}
       <br />
       <div class="collapse" id="comments-{{post.id}}">
         <div class="card">
@@ -74,7 +94,7 @@
           </div>
         </div>
       </div>
-      <p class="card-text">
+      {# <p class="card-text">
         {% if post.comments|length > 0 %}
         <a data-bs-toggle="collapse" href="#comments-{{post.id}}" role="button">
           <small>View {{post.comments|length}} Comments</small>
@@ -82,7 +102,7 @@
         {% else %}
         <small class="text-muted">No Comments</small>
         {% endif %}
-      </p>
+      </p> #}
       <form class="input-group mb-3" method="POST" action="/create-comment/{{post.id}}">
         <input type="text" id="text" name="text" class="form-control" placeholder="Comment something!" />
         <button type="submit" class="btn btn-primary">Comment</button>
@@ -92,11 +112,13 @@
   </div>
   {% endfor %}
 </div>
+{#################################################################################}
 {% block footer %}
-<div style="text-align:center;">
-  <a href="/create-post"><button type="button" class="btn btn-primary btn-lg">
-      Create a Post
-    </button></a>
+<div class="text-center mt-16">
+  <a href="/create-post"><button type="button"
+      class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Create
+      a Post</button>
+  </a>
 </div>
 {% endblock %}
 {% endblock %}
