@@ -10,7 +10,7 @@ Lil Blog, simply what a blog does: post, comment and like.
 - Light/dark mode toggle
 - Password & mail strength checker with RegEx
 - Create & delete posts and comments
-- Like posts
+- Like post
 - Create profile
 - Sign up, login & logout
 - Appropriate warning messages
