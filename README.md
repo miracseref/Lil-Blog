@@ -3,7 +3,6 @@
 ![Logo](https://github.com/miracseref/lil-blog/blob/main/website/static/images/lil-blog-logo.png)
 
 Lil Blog, simply what a blog does: post, comment and like.
-[Link to the app.]()
 
 ## Features
 

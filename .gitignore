@@ -134,5 +134,5 @@ node_modules/
 # Flask Config
 website/config.py
 
-# Database (commented for demonstration purpose)
-# website/database.db
+# Database
+website/database.db
