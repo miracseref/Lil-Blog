@@ -26,9 +26,9 @@ Lil Blog, simply what a blog does: post, comment and like.
 
 ## Tech Stack
 
-**Client:** JavaScript, TailwindCSS
+**Client:** JavaScript, Tailwind CSS
 
-**Server:** Flask
+**Server:** Flask (Python)
 
 ## Run Locally
 
