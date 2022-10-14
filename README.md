@@ -1,18 +1,65 @@
 # Lil Blog
 
-![Logo](https://github.com/miracseref/lil-blog/blob/main/website/static/lil-blog-logo.png)
+![Logo](https://github.com/miracseref/lil-blog/blob/main/website/static/images/lil-blog-logo.png)
 
-Blog created with Flask &amp; styled with Tailwind CSS.
+Lil Blog, simply what a blog does: post, comment and like.
+[Link to the app.]()
 
-# Setup
+## Features
 
-1. Create a new conda environment.
-   `conda create -p venv python=3.9.12 -y`
-2. Activate the virtual environment.
-   `conda activate $path`
-3. Install Tailwind CSS.
-   `npm install -D tailwindcss`
-4. Initialize Tailwind CSS.
-   `npx tailwindcss init`
-5. Install python requirements.
-   `pip install -r requirements.txt`
+- Light/dark mode toggle
+- Password & mail strength checker with RegEx
+- Create & delete posts and comments
+- Like posts
+- Create profile
+- Sign up, login & logout
+- Appropriate warning messages
+
+## Screenshots
+
+| Pages/Mode | Light                                                                                                     | Dark                                                                                                    |
+| ---------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Login      | ![Login Light](https://github.com/miracseref/lil-blog/blob/main/website/static/images/login_light.png)    | ![Login Dark](https://github.com/miracseref/lil-blog/blob/main/website/static/images/login_dark.png)    |
+| Sign up    | ![Sign Up Light](https://github.com/miracseref/lil-blog/blob/main/website/static/images/signup_light.png) | ![Sign Up Dark](https://github.com/miracseref/lil-blog/blob/main/website/static/images/signup_dark.png) |
+| Posts      | ![Posts Light](https://github.com/miracseref/lil-blog/blob/main/website/static/images/posts_light.png)    | ![Posts Dark](https://github.com/miracseref/lil-blog/blob/main/website/static/images/posts_dark.png)    |
+| User       | ![User Light](https://github.com/miracseref/lil-blog/blob/main/website/static/images/user_light.png)      | ![User Dark](https://github.com/miracseref/lil-blog/blob/main/website/static/images/user_dark.png)      |
+
+## Tech Stack
+
+**Client:** JavaScript, TailwindCSS
+
+**Server:** Flask
+
+## Run Locally
+
+Clone the project
+
+```bash
+git clone https://github.com/miracseref/lil-blog.git
+```
+
+Go to the project directory
+
+```bash
+  cd lil-blog
+```
+
+Install Python dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Install JavaScript dependencies
+
+```bash
+npm install package.json
+```
+
+## Environment Variables
+
+To run this project, you will need to create and add the following environment variables to your config.py file
+
+`SECRET_KEY`
+
+`SQLALCHEMY_DATABASE_URI`

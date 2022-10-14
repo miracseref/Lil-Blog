@@ -5,3 +5,20 @@
 form h3 {
   text-align: center;
 }
+
+i {
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+}
+
+.show {
+  display: block;
+}

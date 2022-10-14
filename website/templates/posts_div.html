@@ -2,121 +2,76 @@
 {% block title %}Home{% endblock %}
 {% block content%}
 <h1
-  class="text-center mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+  class="text-center mb-12 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
   Posts</h1>
-<div class="posts">
+<div class="posts text-center flex flex-col items-center">
   {% for post in posts %}
-
-  <div class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-    <div class="py-3 px-6 border-b border-gray-300">
+  <div
+    class="px-8 w-1/2 py-8 mb-8 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+    <div class="py-3 border-b border-gray-300 flex justify-between">
       <a href="/posts/{{post.user.username}}">
-        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">{{post.user.username}}</h5>
+        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-blue-600">{{post.user.username}}
+        </h5>
       </a>
       <div>
-        <span id="likes-count-{{post.id}}">
+        <span id="likes-count-{{post.id}}" class="dark:text-white mr-1">
           {{ post.likes|length }}</span>
         {% if user.id in post.likes|map(attribute="author")|list %}
-        <i class="fas fa-thumbs-up" id="like-button-{{post.id}}" onclick="like({{post.id}})"></i>
+        <i class="fas fa-thumbs-up text-blue-600" like-button-{{post.id}} onclick="like('{{post.id}}')"></i>
         {% else %}
-        <i class="far fa-thumbs-up" id="like-button-{{post.id}}" onclick="like({{post.id}})"></i>
-        {% endif %} {% if user.id == post.author %}
-        <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown"></button>
-          <ul class="dropdown-menu">
-            <li>
-              <a href="/delete-post/{{post.id}}" class="dropdown-item">Delete</a>
-            </li>
-          </ul>
-        </div>
+        <i class="far fa-thumbs-up dark:text-white" id="like-button-{{post.id}}" onclick="like('{{post.id}}')"></i>
         {% endif %}
       </div>
     </div>
-    <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">{{post.text}}</p>
-    {% if post.comments|length > 0 %}
-    <a href="#comments-{{post.id}}" class="inline-flex items-center text-blue-600 hover:underline" type="button"
-      data-bs-toggle="collapse">
-      <small>View {{post.comments|length}} Comments</small>
-    </a>
-    {% else %}
-    <small class="text-slate-400">No Comments</small>
-    {% endif %}
-  </div>
-  {#################################################################################}
-  <div class="card border-dark">
-    <div class="card-header d-flex justify-content-between align-items-center">
-      {# <a href="/posts/{{post.user.username}}">{{post.user.username}}</a> #}
-      {# <div>
-        <span id="likes-count-{{post.id}}">
-          {{ post.likes|length }}</span>
-        {% if user.id in post.likes|map(attribute="author")|list %}
-        <i class="fas fa-thumbs-up" id="like-button-{{post.id}}" onclick="like({{post.id}})"></i>
-        {% else %}
-        <i class="far fa-thumbs-up" id="like-button-{{post.id}}" onclick="like({{post.id}})"></i>
-        {% endif %} {% if user.id == post.author %}
-        <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown"></button>
-          <ul class="dropdown-menu">
-            <li>
-              <a href="/delete-post/{{post.id}}" class="dropdown-item">Delete</a>
-            </li>
-          </ul>
-        </div>
-        {% endif %}
-      </div> #}
-    </div>
-    <div class="card-body">
-      {# <div class="card-text">{{post.text}}</div> #}
-      <br />
-      <div class="collapse" id="comments-{{post.id}}">
-        <div class="card">
-          <div class="card-body" id="comments-expanded-{{post.id}}">
-            {% for comment in post.comments %}
-            <div class="d-flex justify-content-between align-items-center">
-              <div>
-                <a href="/posts/{{comment.user.username}}">{{comment.user.username}}</a>: {{comment.text}}
-              </div>
-              <div>
-                <small class="text-muted"> {{comment.date_created}}</small>
-                {% if user.id == comment.author or user.id == post.author %}
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-primary dropdown-toggle"
-                    data-bs-toggle="dropdown"></button>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a href="/delete-comment/{{comment.id}}" class="dropdown-item">Delete</a>
-                    </li>
-                  </ul>
-                </div>
-                {% endif %}
-              </div>
+    <div class="card-body py-6">
+      <p class="my-3 mb-8 font-normal text-2xl text-gray-700 dark:text-white">{{post.text}}</p>
+      {% if post.comments|length > 0 %}
+      <div class="dropdown w-full">
+        <button onclick="myFunction()" class="dropbtn text-blue-700 focus:outline-none">View {{ post.comments | length
+          }} Comments</button>
+        <div id="myDropdown" class="dropdown-content mt-2 px-2">
+          {% for comment in post.comments %}
+          <div class="flex justify-between items-center px-6 py-4 bg-slate-50 rounded-lg">
+            <div>
+              <a href="/posts/{{comment.user.username}}" class="text-blue-600">{{comment.user.username}}:
+              </a>{{comment.text}}
             </div>
-            {% endfor %}
+            <div>
+              <small class="text-slate-500"> {{comment.date_created}}</small>
+              {% if user.id == comment.author or user.id == post.author %}
+              <a href="/delete-comment/{{comment.id}}"><i class="fas fa-trash ml-2 text-sm"></i></a>
+              {% endif %}
+            </div>
           </div>
+          {% endfor %}
         </div>
       </div>
-      {# <p class="card-text">
-        {% if post.comments|length > 0 %}
-        <a data-bs-toggle="collapse" href="#comments-{{post.id}}" role="button">
-          <small>View {{post.comments|length}} Comments</small>
-        </a>
-        {% else %}
-        <small class="text-muted">No Comments</small>
-        {% endif %}
-      </p> #}
-      <form class="input-group mb-3" method="POST" action="/create-comment/{{post.id}}">
-        <input type="text" id="text" name="text" class="form-control" placeholder="Comment something!" />
-        <button type="submit" class="btn btn-primary">Comment</button>
+      {% else %}
+      <small class="text-slate-400">No Comments</small>
+      {% endif %}
+      <form method="POST" action="/create-comment/{{post.id}}" class="mt-2">
+        <div class="my-4 px-2 flex">
+          <input type="text" id="text" name="text"
+            class="mr-4 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Write a reply..." required>
+          <button type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Reply</button>
+        </div>
       </form>
     </div>
-    <div class="card-footer text-muted">{{post.date_created}}</div>
+    <div class="py-2 border-t border-gray-300 text-gray-600 flex justify-between">
+      {{post.date_created}}
+      {% if user.id == post.author %}
+      <a href="/delete-post/{{post.id}}"><i class="fas fa-trash"></i></a>
+      {% endif %}
+    </div>
   </div>
   {% endfor %}
 </div>
-{#################################################################################}
 {% block footer %}
-<div class="text-center mt-16">
+<div class="text-center my-6">
   <a href="/create-post"><button type="button"
-      class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Create
+      class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Create
       a Post</button>
   </a>
 </div>

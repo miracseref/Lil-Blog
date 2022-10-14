@@ -1,6 +1,4 @@
-/////////////
-// Like Posts
-/////////////
+//// Like Posts ////
 function like(postId) {
   const likeCount = document.getElementById(`likes-count-${postId}`);
   const likeButton = document.getElementById(`likes-button-${postId}`);
@@ -14,13 +12,10 @@ function like(postId) {
       } else {
         likeButton.className = "far fa-thumbs-up";
       }
-    })
-    .catch((e) => alert("Could not like post."));
+    });
 }
 
-///////////////////
-// Toggle Dark Mode
-///////////////////
+//// Toggle Dark Mode ////
 var themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
 var themeToggleLightIcon = document.getElementById("theme-toggle-light-icon");
 
@@ -63,3 +58,22 @@ themeToggleBtn.addEventListener("click", function () {
     }
   }
 });
+
+//// Dropdown ////
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function (event) {
+  if (!event.target.matches(".dropbtn")) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains("show")) {
+        openDropdown.classList.remove("show");
+      }
+    }
+  }
+};
